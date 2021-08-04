@@ -5,10 +5,11 @@ function getSpeciesByIds(...ids) {
     return [];
   }
   return ids.map((id) => data.species.find((species) => species.id === id));
-} 
+}
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const especielSlecionada = data.species.find((species) => species.name === animal);
+  return especielSlecionada.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
