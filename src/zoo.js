@@ -55,8 +55,12 @@ function countAnimals(species) {
   return especielSlecionada.residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = {}) {
+// Obrigado Jonathan e Julio por me lembrar do objetc.entries!
+  const visitantes = Object.entries(entrants);
+
+  return visitantes.reduce((acc, visitante) =>
+    acc + data.prices[visitante[0]] * visitante[1], 0);
 }
 
 function getAnimalMap(options) {
