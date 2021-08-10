@@ -67,8 +67,20 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+// Obrigado Jonathan, mais uma vez!
+function getDayentry(dayName) {
+  const horario = {};
+  const { open, close } = data.hours[dayName];
+  horario[dayName] = dayName === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+  return horario;
+}
+
 function getSchedule(dayName) {
-  // seu código aqui
+  if (!dayName) {
+    const cronograma = Object.entries(data.hours);
+    return cronograma.reduce((acc, days) => ({ ...acc, ...getDayentry(days[0]) }), {});
+  }
+  return getDayentry(dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
