@@ -1,3 +1,6 @@
+const {
+  species
+} = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -56,7 +59,7 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants = {}) {
-// Obrigado Jonathan e Julio por me lembrar do objetc.entries!
+  // Obrigado Jonathan e Julio por me lembrar do objetc.entries!
   const visitantes = Object.entries(entrants);
 
   return visitantes.reduce((acc, visitante) =>
@@ -70,7 +73,10 @@ function getAnimalMap(options) {
 // Obrigado Jonathan, mais uma vez!
 function getDayentry(dayName) {
   const horario = {};
-  const { open, close } = data.hours[dayName];
+  const {
+    open,
+    close
+  } = data.hours[dayName];
   horario[dayName] = dayName === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
   return horario;
 }
@@ -78,13 +84,20 @@ function getDayentry(dayName) {
 function getSchedule(dayName) {
   if (!dayName) {
     const cronograma = Object.entries(data.hours);
-    return cronograma.reduce((acc, days) => ({ ...acc, ...getDayentry(days[0]) }), {});
+    return cronograma.reduce((acc, days) => ({
+      ...acc,
+      ...getDayentry(days[0])
+    }), {});
   }
   return getDayentry(dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const arrayResidentes = data.species
+    .find((animal) => animal.id === animalId).residents
+    .sort((residentA, residentB) => residentB.age - residentA.age);
+  return Object.values(arrayResidentes[0]);
 }
 
 function increasePrices(percentage) {
