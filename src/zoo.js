@@ -98,7 +98,11 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const entradas = Object.entries(data.prices);
+  entradas.forEach(([chave, valor]) => {
+    // Depois de quebrar a cabeça no valor obtido, fui olhar no PR da Anna, para ver como ela consegueu resolver. Imcreible a simplicidade do código! Utilicei a ideia.
+    data.prices[chave] = Math.ceil(valor * (percentage + 100)) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
