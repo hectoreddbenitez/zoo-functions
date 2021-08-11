@@ -75,7 +75,7 @@ function getDayentry(dayName) {
   const horario = {};
   const {
     open,
-    close
+    close,
   } = data.hours[dayName];
   horario[dayName] = dayName === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
   return horario;
@@ -86,7 +86,7 @@ function getSchedule(dayName) {
     const cronograma = Object.entries(data.hours);
     return cronograma.reduce((acc, days) => ({
       ...acc,
-      ...getDayentry(days[0])
+      ...getDayentry(days[0]),
     }), {});
   }
   return getDayentry(dayName);
